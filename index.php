@@ -17,14 +17,17 @@ session_start();
 
 
     if (isset($_POST['submit'])) {
-        $_SESSION['pages'] = null;
-        $needle = $_POST['search'];
-        $_SESSION['start'] = 0;
-        $_SESSION['results'] = $instance->getData($needle);
-        $count = count($_SESSION['results']);
-        $data = displayJson();
+        if (!empty($_POST['search'])) {
+            $_SESSION['pages'] = null;
+            $needle = $_POST['search'];
+            $_SESSION['start'] = 0;
+            $_SESSION['results'] = $instance->getData($needle);
+            $count = count($_SESSION['results']);
+            $data = displayJson();
 
-        $_SESSION['pages'] = $count / 100;
+            $_SESSION['pages'] = $count / 100;
+        }
+
     }
     if (isset($_POST['pagn'])) {
         $page = $_POST['pagn'];
